@@ -3,20 +3,32 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import SnapKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel = RegisterViewModel()
+        
         setupUI()
+        
+        guard let viewModel = viewModel else { return }
+        
+        bind(viewModel)
     }
-
+    
+    private var viewModel: RegisterViewModelPrototype?
+    
     private let accountTextField = UITextField()
     private let passwordTextField = UITextField()
     private let verifyPasswordTextField = UITextField()
     private let registerButton = UIButton(type: .system)
+    
+    private let disposeBag = DisposeBag()
 }
 
 private extension ViewController {
@@ -78,5 +90,63 @@ private extension ViewController {
             $0.leading.equalToSuperview().offset(40)
             $0.centerX.equalToSuperview()
         }
+    }
+}
+
+private extension ViewController {
+    func bind(_ viewModel: RegisterViewModelPrototype) {
+        viewModel
+            .registerResult
+            .subscribe(onNext: { [weak self] result in
+                var message: String {
+                    switch result {
+                    case .successful:
+                        return "Register successful"
+                    case .failed:
+                        return "Register failed"
+                    }
+                }
+                
+                let cancelAction: UIAlertAction = .init(title: "OK", style: .cancel)
+                let alert: UIAlertController = .init(title: "System Alert",
+                                                     message: message,
+                                                     preferredStyle: .alert)
+                alert.addAction(cancelAction)
+                
+                self?.present(alert, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        accountTextField
+            .rx
+            .text
+            .subscribe(onNext: { text in
+                viewModel.accountString.accept(text)
+            })
+            .disposed(by: disposeBag)
+        
+        passwordTextField
+            .rx
+            .text
+            .subscribe(onNext: { text in
+                viewModel.passwordString.accept(text)
+            })
+            .disposed(by: disposeBag)
+        
+        verifyPasswordTextField
+            .rx
+            .text
+            .subscribe(onNext: { text in
+                viewModel.verifyPasswordString.accept(text)
+            })
+            .disposed(by: disposeBag)
+        
+        registerButton
+            .rx
+            .tap
+            .subscribe(onNext: { _ in
+                viewModel.register()
+            })
+            .disposed(by: disposeBag)
     }
 }
