@@ -16,6 +16,7 @@
 		43ABA88A281634860051672B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 43ABA889281634860051672B /* SnapKit */; };
 		43ABA88D281634BC0051672B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 43ABA88C281634BC0051672B /* RxCocoa */; };
 		43ABA88F281634BC0051672B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 43ABA88E281634BC0051672B /* RxSwift */; };
+		43ABA892281640BB0051672B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ABA891281640BB0051672B /* RegisterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		43ABA87D281634040051672B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43ABA880281634040051672B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43ABA882281634040051672B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43ABA891281640BB0051672B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,15 +64,24 @@
 		43ABA873281634030051672B /* RxSwiftDemo */ = {
 			isa = PBXGroup;
 			children = (
+				43ABA8902816409B0051672B /* ViewModels */,
 				43ABA87D281634040051672B /* Assets.xcassets */,
+				43ABA87A281634030051672B /* Main.storyboard */,
+				43ABA87F281634040051672B /* LaunchScreen.storyboard */,
 				43ABA874281634030051672B /* AppDelegate.swift */,
 				43ABA876281634030051672B /* SceneDelegate.swift */,
 				43ABA878281634030051672B /* ViewController.swift */,
-				43ABA87A281634030051672B /* Main.storyboard */,
-				43ABA87F281634040051672B /* LaunchScreen.storyboard */,
 				43ABA882281634040051672B /* Info.plist */,
 			);
 			path = RxSwiftDemo;
+			sourceTree = "<group>";
+		};
+		43ABA8902816409B0051672B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				43ABA891281640BB0051672B /* RegisterViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +167,7 @@
 				43ABA879281634030051672B /* ViewController.swift in Sources */,
 				43ABA875281634030051672B /* AppDelegate.swift in Sources */,
 				43ABA877281634030051672B /* SceneDelegate.swift in Sources */,
+				43ABA892281640BB0051672B /* RegisterViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
