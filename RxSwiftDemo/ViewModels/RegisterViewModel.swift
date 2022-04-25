@@ -6,9 +6,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol RegisterViewModelPrototype {
-    /// 註冊結果
-    var registerResult: PublishRelay<RegisterViewModel.RegisterResult> { get }
+protocol RegisterViewModelInput {
     /// 帳號
     var accountString: BehaviorRelay<String?> { get }
     /// 密碼
@@ -19,12 +17,25 @@ protocol RegisterViewModelPrototype {
     func register()
 }
 
-class RegisterViewModel: RegisterViewModelPrototype {
+protocol RegisterViewModelOutput {
+    /// 註冊結果
+    var registerResult: PublishRelay<RegisterViewModel.RegisterResult> { get }
+}
+
+protocol RegisterViewModelPrototype {
+    var input: RegisterViewModelInput { get }
+    var output: RegisterViewModelOutput { get }
+}
+
+class RegisterViewModel: RegisterViewModelPrototype, RegisterViewModelOutput {
     /// 註冊結果
     enum RegisterResult {
         case successful
         case failed
     }
+    
+    var input: RegisterViewModelInput { self }
+    var output: RegisterViewModelOutput { self }
     
     let registerResult = PublishRelay<RegisterResult>()
     let accountString = BehaviorRelay<String?>(value: nil)
@@ -34,7 +45,7 @@ class RegisterViewModel: RegisterViewModelPrototype {
     private let disposeBag = DisposeBag()
 }
 
-extension RegisterViewModel {
+extension RegisterViewModel: RegisterViewModelInput {
     func register() {
         guard let accountString = accountString.value, accountString.count >= 6,
               let passwordString = passwordString.value, passwordString.count >= 8,

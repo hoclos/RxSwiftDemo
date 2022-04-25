@@ -96,6 +96,7 @@ private extension ViewController {
 private extension ViewController {
     func bind(_ viewModel: RegisterViewModelPrototype) {
         viewModel
+            .output
             .registerResult
             .subscribe(onNext: { [weak self] result in
                 var message: String {
@@ -120,32 +121,26 @@ private extension ViewController {
         accountTextField
             .rx
             .text
-            .subscribe(onNext: { text in
-                viewModel.accountString.accept(text)
-            })
+            .bind(to: viewModel.input.accountString)
             .disposed(by: disposeBag)
         
         passwordTextField
             .rx
             .text
-            .subscribe(onNext: { text in
-                viewModel.passwordString.accept(text)
-            })
+            .bind(to: viewModel.input.passwordString)
             .disposed(by: disposeBag)
         
         verifyPasswordTextField
             .rx
             .text
-            .subscribe(onNext: { text in
-                viewModel.verifyPasswordString.accept(text)
-            })
+            .bind(to: viewModel.input.verifyPasswordString)
             .disposed(by: disposeBag)
         
         registerButton
             .rx
             .tap
             .subscribe(onNext: { _ in
-                viewModel.register()
+                viewModel.input.register()
             })
             .disposed(by: disposeBag)
     }
