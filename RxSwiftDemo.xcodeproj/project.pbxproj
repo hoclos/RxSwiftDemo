@@ -63,11 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				43ABA87D281634040051672B /* Assets.xcassets */,
+				43ABA87A281634030051672B /* Main.storyboard */,
+				43ABA87F281634040051672B /* LaunchScreen.storyboard */,
 				43ABA874281634030051672B /* AppDelegate.swift */,
 				43ABA876281634030051672B /* SceneDelegate.swift */,
 				43ABA878281634030051672B /* ViewController.swift */,
-				43ABA87A281634030051672B /* Main.storyboard */,
-				43ABA87F281634040051672B /* LaunchScreen.storyboard */,
 				43ABA882281634040051672B /* Info.plist */,
 			);
 			path = RxSwiftDemo;
